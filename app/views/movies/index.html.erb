@@ -1,0 +1,33 @@
+<% if notice %>
+<div class="alert alert-success" role="alert" id="notice">
+  <%= notice %>
+</div>
+<% end %>
+
+<%= link_to '+', new_movie_path, class: "btn btn-danger btn-add-new" %>
+
+<div class="row">
+    <% @movies.each do |movie| %>
+      <div class="col-sm-4">
+        <a class="movie-card" href="<%=edit_movie_path(movie) %>">
+          <h2><%= movie.title %></h2>
+          <div class="genre"><%= movie.genre %></div>
+          <div class="avatar">
+            <%= image_tag movie.avatar.url %>
+          </div>
+          <div class="rating">
+            	<% for i in 1..5 %>
+                <i class="glyphicon  <%=i<=movie.rating ? "glyphicon-star": "glyphicon-star-empty"%>"></i>
+              <% end %>
+          </div>
+          <div class="cover">
+            <% movie.actor.split(',').each do |actor| %>
+              <div class='actor'><%=actor %></div>
+            <% end %>
+          </div>
+        </a>
+      </div>
+    <% end %>
+  </tbody>
+</div>
+
